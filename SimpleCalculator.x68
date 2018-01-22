@@ -30,6 +30,9 @@ start   move.b  #14,d0      Display instructions
     beq     divide           branch if equal
     
     cmp     #0,d1           if 0, exit
+    move.b  #14,d0         Display 'The program has ended' prompt
+    lea     exitMsg,a1
+    trap    #15
     beq     end               branch if equal
   
 end     SIMHALT
@@ -47,7 +50,7 @@ add move.b #14,d0   Display 'enter first number' prompt
     move.b #4,d0
     trap    #15
     
-   add.b d2,d1 add user stores result in d1
+   add.b d2,d1 adds user input, stores result in d1
    
    move.b #14,d0 #displays 'your result is: '
    lea resultMsg,a1
@@ -58,7 +61,27 @@ add move.b #14,d0   Display 'enter first number' prompt
     
    bra start    go back to start
     
-subtract 
+subtract move.b #14,d0   Display 'enter first number' prompt
+    lea firstNumMsg,a1
+    trap #15
+    move.b #4,d0 retrieves user's input and saves to d1
+    trap    #15  
+    move d1,d2 takes whatever's in d1 (the user's input) and puts it into d2 so it can be displayed
+    
+    move.b  #14,d0          Display 'enter second number' prompt
+    lea     secondNumMsg,a1
+    trap    #15
+    move.b #4,d0
+    trap    #15
+    
+   sub.b d2,d1 #subtracts first number from second number, stores result in d1
+   
+   move.b #14,d0 #displays 'your result is: '
+   lea resultMsg,a1
+   trap #15
+      
+   move.b #3,d0 #used to display contents of d1
+   trap #15
 
    bra start    goes back to start
 
@@ -79,12 +102,14 @@ instrMsg    dc.b    CR,LF,CR,LF
       dc.b '1. Addition ',CR,LF
       dc.b '2. Subtraction',CR,LF
       dc.b '3. Multiplication',CR,LF
-      dc.b '4. Division',CR,LF,CR,LF,0
+      dc.b '4. Division',CR,LF
+      dc.b '0. Exit',CR,LF,CR,LF,0
       
-opMsg dc.b CR,LF,'Enter a the operation you would like to perform  ',0
+opMsg dc.b CR,LF,'Enter a the operation you would like to perform:  ',0
 firstNumMsg    dc.b    CR,LF,'Enter a number from 00 to 99: ',0
 secondNumMsg dc.b CR,LF,'Enter another number from 00 to 99: ',0
 resultMsg dc.b CR,LF,'Your result is: ',0
+exitMsg dc.b CR,LF,'The program has ended.',0
         
     END     start
 
