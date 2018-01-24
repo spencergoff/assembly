@@ -30,7 +30,7 @@ start   move.b  #14,d0      Display instructions
     beq     divide           branch if equal
     
     cmp     #0,d1           if 0, exit
-    move.b  #14,d0         Display 'The program has ended' prompt
+    move.b  #14,d0       Display 'The program has ended' prompt
     lea     exitMsg,a1
     trap    #15
     beq     end               branch if equal
@@ -74,7 +74,7 @@ subtract move.b #14,d0   Display 'enter first number' prompt
     move.b #4,d0
     trap    #15
     
-   sub.b d2,d1 #subtracts first number from second number, stores result in d1
+   sub.l d2,d1 #subtracts first number from second number, stores result in d1
    
    move.b #14,d0 #displays 'your result is: '
    lea resultMsg,a1
@@ -85,14 +85,33 @@ subtract move.b #14,d0   Display 'enter first number' prompt
 
    bra start    goes back to start
 
-multiply
+multiply move.b #14,d0   Display 'enter first number' prompt
+    lea firstNumMsg,a1
+    trap #15
+    move.b #4,d0 retrieves user's input and saves to d1
+    trap    #15  
+    move d1,d2 takes whatever's in d1 (the user's input) and puts it into d2 so it can be displayed
+    
+    move.b  #14,d0          Display 'enter second number' prompt
+    lea     secondNumMsg,a1
+    trap    #15
+    move.b #4,d0
+    trap    #15
+    
+   muls.w d2,d1 multiplies first and second number, stores result in d1
+   
+   move.b #14,d0 #displays 'your result is: '
+   lea resultMsg,a1
+   trap #15
+      
+   move.b #3,d0 #used to display contents of d1
+   trap #15
 
    bra start    goes back to start
 
 divide
 
    bra start    goes back to start
-
 
 CR      EQU     $0D
 LF      EQU     $0A
@@ -112,7 +131,3 @@ resultMsg dc.b CR,LF,'Your result is: ',0
 exitMsg dc.b CR,LF,'The program has ended.',0
         
     END     start
-
-
-
-
