@@ -48,9 +48,7 @@ _main:
 ; newline();
        jsr       (A2)
 ; sendmsg(&MSG1);
-move.b  #14,d0  Display instructions
-       lea     instrMsg,a1
-       trap    #15
+       lea       io_1,A6       
        jsr       (A3)
        addq.w    #4,A7
 ; ASCII = getchar();
@@ -68,8 +66,8 @@ move.b  #14,d0  Display instructions
 ; newline();
        jsr       (A2)
 ; sendmsg(&MSG2);
-       pea       @io_2.L
-       jsr       (A3)
+       lea       io_2.L,A7
+,      jsr       (A3)
        addq.w    #4,A7
 ; ASCII = 0;
        clr.b     D2
@@ -88,7 +86,7 @@ move.b  #14,d0  Display instructions
 ; newline();
        jsr       (A2)
 ; sendmsg(&MSG7);
-       pea       @io_3.L
+       lea       io_3.L,A6
        jsr       (A3)
        addq.w    #4,A7
 ; sendchar(num1 + 48);
@@ -101,7 +99,7 @@ move.b  #14,d0  Display instructions
 ; newline();
        jsr       (A2)
 ; sendmsg(&MSG8);
-       pea       @io_4.L
+       lea       io_4.L,A6
        jsr       (A3)
        addq.w    #4,A7
 ; sendchar(num2 + 48);
@@ -122,7 +120,7 @@ move.b  #14,d0  Display instructions
 ; newline();
        jsr       (A2)
 ; sendmsg(&answer);
-       pea       @io_5.L
+       lea       io_5.L,A6
        jsr       (A3)
        addq.w    #4,A7
 ; //sendchar(result);
@@ -137,7 +135,7 @@ move.b  #14,d0  Display instructions
 ; newline();
        jsr       (A2)
 ; sendmsg(&MSG5);
-       pea       @io_6.L
+       lea       io_6.L,A6
        jsr       (A3)
        addq.w    #4,A7
 ; newline();
@@ -247,7 +245,7 @@ move.b  #14,d0  Display instructions
 ; }
 ; }*/
 ; sendmsg(&MSG6);
-       pea       @io_7.L
+       pea       io_7.L
        jsr       (A3)
        addq.w    #4,A7
 ; newline();
@@ -381,30 +379,30 @@ sendmsg_3:
        xdef      _newline
 _newline:
 ; sendchar(LF);
-       pea       10
+       lea       10,A7
        jsr       _sendchar
        addq.w    #4,A7
 ; sendchar(CR);
-       pea       13
+       f       13
        jsr       _sendchar
        addq.w    #4,A7
        rts
 ; }
        section   const
-@io_1:
+io_1:
        dc.b      69,110,116,101,114,32,70,105,114,115,116,32
        dc.b      78,117,109,98,101,114,58,32,0
-@io_2:
+io_2:
        dc.b      69,110,116,101,114,32,83,101,99,111,110,100
        dc.b      32,78,117,109,98,101,114,58,32,0
-@io_3:
+io_3:
        dc.b      78,117,109,49,58,32,0
-@io_4:
+io_4:
        dc.b      78,117,109,50,58,32,0
-@io_5:
+io_5:
        dc.b      82,101,115,117,108,116,58,32,0
-@io_6:
+io_6:
        dc.b      65,100,100,32,65,103,97,105,110,63,0
-@io_7:
+io_7:
        dc.b      71,111,111,100,98,121,101,33,0
 
