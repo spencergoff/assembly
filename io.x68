@@ -18,133 +18,71 @@
 #define LF   0x0A
 
 //Protocols
-unsigned char getInput();
+void getInput();
 void printPrompt();
 void printAnswer();
 
 //Main Code
 void main()
 {
-    unsigned char choice;
+    unsigned char choice = 5;
     unsigned char num1 = 0;
     unsigned char num2 = 0;
     unsigned char result = 0;
 
-    while(again == 'Y' || again == 'y')
+    while(choice != 0)
     {
-       printPrompt(&MENU);
+       printPrompt();
        choice = getInput();
-       printPrompt(choice);
+       printPrompt();
        switch(choice)
        {
+            case '0':   //exit
+                break;
+
             case '1':          //addition
                 printPrompt();
-                ASCII = getInput();
-                printPrompt(ASCII);
-                num1 = ASCII - 48;
-                printPrompt(&MSG2);
-                ASCII = getInput();
-                printPrompt(ASCII);
-                num2 = ASCII - 48;
         	    result = num1 + num2;
-                printPrompt(&answer);
-                printAnswer(result + 48);
-                printPrompt(&MSG5);
-                newline();
-                again = getInput();
-               break;
+                printAnswer();
+                break;
 
             case '2':           //subtraction
-        	    newline();
-                printPrompt(&MSG1);
-                ASCII = getInput();
-                printPrompt(ASCII);
-                num1 = ASCII - 48;
-                newline();
-                printPrompt(&MSG2);
-                ASCII = getInput();
-                printPrompt(ASCII);
-                num2 = ASCII - 48;
+                printPrompt();
         	    result = num1 - num2;
-                newline();
-                printPrompt(&answer);
-                printAnswer(result + 48);
-                newline();
-                printPrompt(&MSG5);
-                newline();
-                again = getInput();
-               break;
+                printAnswer();
+                break;
 
             case '3':           //multiplication
-        	    newline();
-                printPrompt(&MSG1);
-                ASCII = getInput();
-                printPrompt(ASCII);
-                num1 = ASCII - 48;
-                newline();
-                printPrompt(&MSG2);
-                ASCII = getInput();
-                printPrompt(ASCII);
-                num2 = ASCII - 48;
+                printPrompt();
         	    result = num1 * num2;
-                newline();
-                printPrompt(&answer);
-                printAnswer(result + 48);
-                newline();
-                printPrompt(&MSG5);
-                newline();
-                again = getInput();
+                printAnswer();
                 break;
 
             case '4':           //division
-                newline();
-                printPrompt(&MSG1);
-                ASCII = getInput();
-                printPrompt(ASCII);
-                num1 = ASCII - 48;
-                newline();
-                printPrompt(&MSG2);
-                ASCII = 0;
-                ASCII = getInput();
-                printPrompt(ASCII);
-                num2 = ASCII - 48;
-                printPrompt(&MSG7);
-                newline();
-                printPrompt(num1 + 48);
-                newline();
-                printPrompt(&MSG8);
-                printPrompt(num2 + 48);
-                newline();
+                printPrompt();
         	    result = num1 / num2;
-                newline();
-                printPrompt(&answer);
-                printAnswer(result + 48);
-                newline();
-                printPrompt(&MSG5);
-                newline();
-                again = getInput();
+                printAnswer();
                 break;
        }
 	}
 
-	printPrompt(&MSG6);
-	newline();
+	printPrompt();
 }
 
 //Subroutine to get an int typed into Hyperterminal
 void getInput()
 {
-    
+
 }
 
 //Subroutine to print a prompt string to Hyperterminal
 void printPrompt()
 {
-    
+
 }
 
 //Subroutine to print an answer string to Hyperterminal
 void printAnswer()
 {
-    
+
 }
