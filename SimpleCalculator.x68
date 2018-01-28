@@ -116,23 +116,23 @@ divide move.b #14,d0   Display 'enter first number' prompt
     trap #15
     move.b #4,d0 retrieves user's input and saves to d1
     trap    #15  
-    move.l d1,d2 takes whatever's in d1 (the user's input) and puts it into d2 so it can be displayed
+    move.b d1,d2 takes whatever's in d1 (the user's input) and puts it into d2 
     
     move.b  #14,d0          Display 'enter second number' prompt
     lea     secondNumMsg,a1
     trap    #15
     move.b #4,d0
     trap    #15
-    move.l d1,d3 t          akes whatever's in d1 (the user's input) and puts it into d2 so it can be displayed
+    move.b d1,d3    takes whatever's in d1 (the user's input) and puts it into d3 
     
-    move.l d2,d1
-    sub.l d3,d1 #subtracts first number from second number, stores result in d1
+    divs d3,d2 #divides first number and second number, stores result in d2
+    move.b d2,d1      
    
    move.b #14,d0 #displays 'your result is: '
    lea resultMsg,a1
    trap #15
       
-   move.b #3,d0 #used to display contents of d1
+   move.b #3,d0 used to display contents of d1
    trap #15
 
    bra start    goes back to start
