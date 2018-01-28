@@ -140,22 +140,30 @@ main_3:
 ; {
 
 _getInput:
-    move.b  #4,d0         
-    trap    #15
+    lea     firstNumMsg,a1 //display 'enter first number'
+    jsr       (A2) //go to printPrompt
+    ;store first result somewhere
+    
+    lea     secondNumMsg,a1 //display 'enter second number'
+    jsr       (A2) //go to printPrompt
+    ;store second result somewhere
+    
+    
+    
     rts
 ; }
 ; //Subroutine to print a prompt string to Hyperterminal
 ; void printPrompt()
 ; {
-_printPrompt: //(A2)
-       move.b  #4,d0      Display instructions
+_printPrompt: ;(A2)
+       move.b  #14,d0      Display instructions
        trap    #15
        rts
 ; }
 ; //Subroutine to print an answer string to Hyperterminal
 ; void printAnswer()
 ; {
-_printAnswer: //(A3)
+_printAnswer: ;(A3)
        move.b  #14,d0      
        trap    #15
        rts
